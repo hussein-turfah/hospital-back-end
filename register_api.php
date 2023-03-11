@@ -59,7 +59,7 @@ if (mysqli_stmt_num_rows($sql_statement)>0){
 
 
 
-//this function returns a random string which will be used later as the salt.
+//this function returns a random string that will be used later as the salt.
 function generateRandomString($length = 10){
     $characters = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
     $characters_length = strlen($characters);
