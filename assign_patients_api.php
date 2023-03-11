@@ -12,10 +12,10 @@ if ($_SERVER['REQUEST_METHOD'] =='POST'){
   $sql_statement = mysqli_prepare($link,$sql_statement);
   mysqli_stmt_bind_param($sql_statement, 'ii',$hospital_id,$user_id);
   if(mysqli_stmt_execute($sql_statement)){
-    $response['sucess'] = 'Patient sucessfully assigned';
+    $response['sucess'] = 'Patient sucessfully assigned.';
     echo json_encode($response);
   }else{
-    $error = 'There was an error assigning this patient';
+    $error = 'There was an error assigning this patient!';
     $response = ['response' => $error];
     echo json_encode([$error]);
   }
