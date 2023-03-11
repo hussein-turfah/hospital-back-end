@@ -34,7 +34,10 @@ if (mysqli_stmt_num_rows($sql_statement)>0){
     $response = ['response'=> $error];
     echo json_encode($error);
 }else{
-    $sql_statement2 = 'insert into users (name, email, password,salt, gender, dob,usertype_id) values(?,?,?,?,?,?,?)';
+    $sql_statement2 = 'insert into users 
+    (name, email, password,salt, gender, dob,usertype_id) 
+    values(?,?,?,?,?,?,?)';
+    
     if($sql_statement = mysqli_prepare($link,$sql_statement2)){
         mysqli_stmt_bind_param($sql_statement, 'ssssssi',$name,$email,$hashed_password,$salt,$gender,$birth,$user_type);
         if(mysqli_stmt_execute($sql_statement)){

@@ -4,7 +4,6 @@ $database = 'hospital_db';
 $username = 'root';
 $password = '';
 
-#echo 'database loaded successfully';
 
 $link = new mysqli($host_name, $username, $password, $database);
 
