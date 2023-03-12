@@ -12,25 +12,32 @@ if ($_SERVER['REQUEST_METHOD'] =='POST'){
   //if he was present at least one time, it will remove him
   //from the hospital chosen(by its id)
   if(count(check_presence($user_id))>0){
-    $sql_statement = 'update hospital_users
-    set is_active = 0
-    where hospital_id = ? and user_id = ?';
+    if(count(checkPresenceHospital($hospital_id,$user_id)) == 1 ){
 
-    $sql_statement = mysqli_prepare($link,$sql_statement);
-    mysqli_stmt_bind_param($sql_statement,'ii',$hospital_id,$user_id);
-    
-    if(mysqli_stmt_execute($sql_statement)){
-      $response['sucess'] = 'Patient sucessfully removed.';
-      echo json_encode($response);
-    }else{
-      $error = 'There was an error removing this patient!';
-      $response = ['response' => $error];
-      echo json_encode([$error]);
-    };
+      $sql_statement = 'update hospital_users
+      set is_active = 0
+      where hospital_id = ? and user_id = ?';
+
+      $sql_statement = mysqli_prepare($link,$sql_statement);
+      mysqli_stmt_bind_param($sql_statement,'ii',$hospital_id,$user_id);
+      
+      if(mysqli_stmt_execute($sql_statement)){
+        $response['sucess'] = 'Patient sucessfully removed.';
+        echo json_encode($response);
+      }else{
+        $error = 'There was an error removing this patient!';
+        $response = ['response' => $error];
+        echo json_encode([$error]);
+    }
   }else{
-    $error = 'This patient is not available in this hospital!';
+    $error = 'The user is not present in this hospital. Please check other hospitals!';
     $response = ['response' => $error];
-    echo json_encode([$error]);;
+    echo json_encode([$error]); 
+  };
+  }else{
+    $error = 'This patient is not available in any hospital!';
+    $response = ['response' => $error];
+    echo json_encode([$error]);
   };
 
   

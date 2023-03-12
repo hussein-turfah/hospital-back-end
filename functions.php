@@ -18,4 +18,23 @@ include('credentials_db.php');
     $presence_data = mysqli_fetch_all($presence_result);
     return $presence_data;
     }
+
+  function checkPresenceHospital($hospital_id,$user_id){
+    include('credentials_db.php');
+
+    $check_presence = 'SELECT is_active 
+    from hospital_users
+    where user_id = ?
+    and hospital_id = ?
+    and is_active = 1';
+
+    $check_presence = mysqli_prepare($link,$check_presence);
+    mysqli_stmt_bind_param($check_presence,'ii',$user_id,$hospital_id);
+
+    mysqli_stmt_execute($check_presence);
+    $presence_result = mysqli_stmt_get_result($check_presence);
+    $presence_data = mysqli_fetch_all($presence_result);
+    return $presence_data;
+    }
+
 ?>
