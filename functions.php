@@ -38,11 +38,11 @@ include('credentials_db.php');
     }
 
     function listData($table_name){
-      
+
 
       include('credentials_db.php');
     
-      $sql_statement = "select * from $table_name";
+      $sql_statement = "select id,name from $table_name";
     
       $sql_result = mysqli_query($link,$sql_statement);
       $data = mysqli_fetch_all($sql_result);
