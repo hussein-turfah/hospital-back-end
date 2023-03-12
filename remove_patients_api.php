@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] =='POST'){
         echo json_encode([$error]);
     }
   }else{
-    $error = 'The user is not present in this hospital. Please check other hospitals!';
+    $error = 'This patient is not present in this hospital. Please check other hospitals!';
     $response = ['response' => $error];
     echo json_encode([$error]); 
   };
