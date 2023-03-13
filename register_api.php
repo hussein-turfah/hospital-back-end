@@ -1,9 +1,8 @@
 <?php
 
 #DO NOT FORGET TO ADD THE USERTYPE CHOSEN INSTEAD OF USERTYPE GIVEN FOR TEST ON LINE 21!!!!!
-
-session_start();
 include('credentials_db.php');
+session_start();
 
 #initializing variables
 $email_error = "";
@@ -16,7 +15,7 @@ $email = $_POST['email'];
 $password = $_POST['password'];
 $salt = generateRandomString(4);
 $hashed_password = hash('sha256',$password.$salt);
-$birth = $_POST['dob'];
+$birth = $_POST['birth_date'];
 $gender = $_POST['gender'];
 $user_type = 3;
 
@@ -42,7 +41,7 @@ if (mysqli_stmt_num_rows($sql_statement)>0){
         mysqli_stmt_bind_param($sql_statement, 'ssssssi',$name,$email,$hashed_password,$salt,$gender,$birth,$user_type);
         if(mysqli_stmt_execute($sql_statement)){
             $success = 'success';
-            $response['status'] = 'sucess';
+            $response['status'] = 'success';
             echo json_encode($response);
         }else{
             $error = 'sql excute error';
