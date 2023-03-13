@@ -24,12 +24,11 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
     $row = mysqli_fetch_assoc($result);
     $password = hash('sha256',$password . $row['salt']);
 
-    // echo $password;
-    // echo '-'.$row['password'];
-    // echo '-'.$row['salt']
     if ($email === $row['email'] && $password === $row['password']){
       $response['user_id'] = $row['id'];
+      $response1['usertype_id'] = $row['usertype_id'];
       echo json_encode($response);
+      echo json_encode($response1);
     }else{
       echo json_encode('Please check your email and password!');
     }

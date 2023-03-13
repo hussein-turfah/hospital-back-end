@@ -17,7 +17,7 @@ $salt = generateRandomString(4);
 $hashed_password = hash('sha256',$password.$salt);
 $birth = $_POST['birth_date'];
 $gender = $_POST['gender'];
-$user_type = 3;
+$user_type = $_POST['usertype'];
 
 
 
@@ -38,7 +38,7 @@ if (mysqli_stmt_num_rows($sql_statement)>0){
     values(?,?,?,?,?,?,?)';
     
     if($sql_statement = mysqli_prepare($link,$sql_statement2)){
-        mysqli_stmt_bind_param($sql_statement, 'ssssssi',$name,$email,$hashed_password,$salt,$gender,$birth,$user_type);
+        mysqli_stmt_bind_param($sql_statement, 'sssssss',$name,$email,$hashed_password,$salt,$gender,$birth,$user_type);
         if(mysqli_stmt_execute($sql_statement)){
             $success = 'success';
             $response['status'] = 'success';
