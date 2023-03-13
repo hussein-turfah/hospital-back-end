@@ -26,10 +26,9 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
     if ($email === $row['email'] && $password === $row['password']){
       $response['user_id'] = $row['id'];
-      $response1['usertype_id'] = $row['usertype_id'];
+      $response['usertype_id'] = $row['usertype_id'];
       echo json_encode($response);
-      echo json_encode($response1);
-    }else{
+    }else{  
       echo json_encode('Please check your email and password!');
     }
 
